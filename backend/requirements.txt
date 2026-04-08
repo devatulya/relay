@@ -1,0 +1,7 @@
+flask[async]
+quart
+playwright
+pandas
+gspread
+oauth2client
+openpyxl

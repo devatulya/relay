@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Project specific secrets
+backend/credentials.json
+wa_session/
+*.log
+creators_dump.txt
+creators_filtered.txt
+
+# IDE
+.idea/
+.vscode/
+.gemini/
+
+# OS
+.DS_Store
+Thumbs.db

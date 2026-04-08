@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>API Documentation - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(36, 214, 101, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300"
+                        viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="20" r="5" fill="#4F46E5" />
+                        <circle cx="30" cy="10" r="5" fill="#4F46E5" />
+                        <circle cx="50" cy="20" r="5" fill="#4F46E5" />
+                        <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-3">
+                    <a href="/help"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">
+                        Help Center
+                    </a>
+                    <div class="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                    <a href="/"
+                        class="ml-2 inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-semibold rounded-lg text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:opacity-90 transition-all shadow-sm">
+                        Go to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
+
+            <!-- Sidebar -->
+            <aside
+                class="sticky top-16 w-full md:w-64 h-auto md:h-[calc(100vh-64px)] overflow-y-auto py-8 hidden md:block border-r border-gray-100 dark:border-gray-800 pr-6">
+                <div class="space-y-1">
+                    <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Documentation</p>
+                    <a href="#overview"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md bg-brand-50 dark:bg-brand-900/10 text-brand-700 dark:text-brand-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mr-3"></span>
+                        Overview
+                    </a>
+                    <a href="#data-source"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-all">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600 mr-3 group-hover:bg-gray-400 transition-colors"></span>
+                        Data Source
+                    </a>
+                    <a href="#brand-input"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-all">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600 mr-3 group-hover:bg-gray-400 transition-colors"></span>
+                        Brand Input
+                    </a>
+                    <a href="#message-logic"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-all">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600 mr-3 group-hover:bg-gray-400 transition-colors"></span>
+                        Message Logic
+                    </a>
+                    <a href="#execution-flow"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-all">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600 mr-3 group-hover:bg-gray-400 transition-colors"></span>
+                        Execution Flow
+                    </a>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
+                    <a href="https://wa.me/919691769385?text=Hi%20Atulya,%20I%20need%20help%20with%20Influenze%20Relay" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                            <span class="material-symbols-outlined text-sm">chat</span>
+                        </div>
+                        <div class="text-xs">
+                            <p class="font-medium text-gray-900 dark:text-white">Need help?</p>
+                            <p class="text-brand-600 dark:text-brand-400 font-semibold group-hover:underline">Message on WhatsApp</p>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 py-10 md:px-12 w-full max-w-4xl">
+                <!-- Header -->
+                <div class="mb-12 border-b border-gray-100 dark:border-gray-800 pb-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span
+                            class="px-2 py-1 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">Internal
+                            Tool</span>
+                        <span
+                            class="px-2 py-1 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-bold uppercase tracking-wider">v1.2.0</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
+                        API Documentation</h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed">
+                        Technical resource for the Influenze Relay automation system. Understand how data flows between
+                        Google Sheets and WhatsApp Web.
+                    </p>
+                </div>
+
+                <div class="space-y-16">
+                    <!-- Overview -->
+                    <section id="overview" class="scroll-mt-24">
+                        <div class="prose prose-lg prose-gray dark:prose-invert max-w-none">
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Influenze Relay is a secure, internal-only automation system. It orchestrates three
+                                isolated components without using public APIs, ensuring data sovereignty and session
+                                privacy.
+                            </p>
+                        </div>
+
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div
+                                class="p-6 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="material-symbols-outlined text-brand-500 text-4xl mb-4">table_view</span>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Google Sheets</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Primary Database & CRM</p>
+                            </div>
+                            <div
+                                class="p-6 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="material-symbols-outlined text-brand-500 text-4xl mb-4">chat</span>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">WhatsApp Web</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Message Delivery Channel</p>
+                            </div>
+                            <div
+                                class="p-6 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="material-symbols-outlined text-brand-500 text-4xl mb-4">dashboard</span>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Dashboard</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Command & Control</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-8 p-4 rounded-lg bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/50 flex gap-4">
+                            <span
+                                class="material-symbols-outlined text-orange-600 dark:text-orange-400 flex-shrink-0">warning</span>
+                            <div class="text-sm text-orange-800 dark:text-orange-200">
+                                <strong>Important:</strong> This system uses a headless browser session to interact with
+                                WhatsApp Web. It requires an active phone connection and must be kept running during
+                                outreach campaigns.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Data Source -->
+                    <section id="data-source" class="scroll-mt-24">
+                        <div class="flex items-center gap-3 mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Data Source</h2>
+                            <div class="h-px flex-1 bg-gray-200 dark:bg-gray-800"></div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            The system expects a specific schema in the connected Google Sheet. Ensure your sheet has
+                            the following headers:
+                        </p>
+                        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
+                            <div class="px-4 py-2 bg-gray-800 border-b border-gray-700 flex gap-2">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="p-6 overflow-x-auto">
+                                <code class="font-mono text-sm text-brand-300">
+                                    [ "Name", "Niche", "Age", "Category", "Rate", "WhatsApp Number", "Last Contacted" ]
+                                </code>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Brand Input -->
+                    <section id="brand-input" class="scroll-mt-24">
+                        <div class="flex items-center gap-3 mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Brand Input</h2>
+                            <div class="h-px flex-1 bg-gray-200 dark:bg-gray-800"></div>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+                                <thead class="bg-gray-50 dark:bg-gray-800/50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Parameter</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+                                    <tr>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white font-mono">
+                                            Brand Name</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Name of the
+                                            client brand.</td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white font-mono">
+                                            Required Niche</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Filters creators
+                                            by this exact niche string.</td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white font-mono">
+                                            Budget</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Max budget
+                                            available per creator.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Message Logic -->
+                    <section id="message-logic" class="scroll-mt-24">
+                        <div class="flex items-center gap-3 mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Message Logic</h2>
+                            <div class="h-px flex-1 bg-gray-200 dark:bg-gray-800"></div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            We calculate the fair offer price dynamically. This prevents overcommitting budget while
+                            ensuring creators get their asked rate if within budget. The total payout is then dynamically multiplied by the number of deliverables requested for the overarching campaign.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-6 bg-gray-100 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                                <div class="text-lg font-mono font-medium text-gray-800 dark:text-gray-200">
+                                    Base Price = <span class="text-brand-600 dark:text-brand-400">MIN</span>( Brand Budget, Creator Rate )
+                                </div>
+                            </div>
+                            <div class="flex items-center p-6 bg-gray-100 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                                <div class="text-lg font-mono font-medium text-gray-800 dark:text-gray-200">
+                                    Total Payout = Base Price × Deliverables Count
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mt-6 leading-relaxed">
+                                If the product is non-retainable, a specific <code>{{retainable_line}}</code> text is automatically injected into the Jinja2 template specifying that the product must be returned safely upon completion.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Execution Flow -->
+                    <section id="execution-flow" class="scroll-mt-24">
+                        <div class="flex items-center gap-3 mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Execution Flow</h2>
+                            <div class="h-px flex-1 bg-gray-200 dark:bg-gray-800"></div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute top-0 bottom-0 left-4 w-0.5 bg-gray-200 dark:bg-gray-800"></div>
+
+                            <div class="relative pl-12 pb-8">
+                                <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white dark:bg-gray-900 border-2 border-brand-500 flex items-center justify-center z-10">
+                                    <span class="text-xs font-bold text-brand-600 dark:text-brand-400">1</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Fetch Data</h4>
+                                <p class="text-gray-500 dark:text-gray-400 mt-1">System pulls latest rows from Google Sheet, parsing complex numerical properties robustly without artificial limits.</p>
+                            </div>
+
+                            <div class="relative pl-12 pb-8">
+                                <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white dark:bg-gray-900 border-2 border-brand-500 flex items-center justify-center z-10">
+                                    <span class="text-xs font-bold text-brand-600 dark:text-brand-400">2</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Filter & Match</h4>
+                                <p class="text-gray-500 dark:text-gray-400 mt-1">Creators are filtered comprehensively by niche, age, target category, and any recent contact cooldown restrictions.</p>
+                            </div>
+
+                            <div class="relative pl-12 pb-8">
+                                <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white dark:bg-gray-900 border-2 border-brand-500 flex items-center justify-center z-10">
+                                    <span class="text-xs font-bold text-brand-600 dark:text-brand-400">3</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Processing & Rendering</h4>
+                                <p class="text-gray-500 dark:text-gray-400 mt-1">Message templates are automatically populated with calculated workflow variables using the Jinja2 engine.</p>
+                            </div>
+
+                            <div class="relative pl-12 pb-8">
+                                <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900 border-2 border-brand-500 flex items-center justify-center z-10">
+                                    <span class="material-symbols-outlined text-brand-600 dark:text-brand-400 text-sm">visibility</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Preview Control</h4>
+                                <p class="text-gray-500 dark:text-gray-400 mt-1">A fully branded two-stage preview interface is presented to the user to visually inspect the filtered datasets and payout metrics prior to confirming dispatch.</p>
+                            </div>
+
+                            <div class="relative pl-12">
+                                <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center z-10">
+                                    <span class="material-symbols-outlined text-white text-sm">check</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Dispatch Automation</h4>
+                                <p class="text-gray-500 dark:text-gray-400 mt-1">Messages are sequentially generated and dispatched through an automated headless Web WhatsApp session, observing 40s human-delays to prevent anti-spam triggers.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('aside a[href^="#"]');
+
+            const activateNav = (targetId) => {
+                navLinks.forEach(link => {
+                    const dot = link.querySelector('span');
+                    const isActive = link.getAttribute('href') === `#${targetId}`;
+
+                    if (isActive) {
+                        link.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'hover:text-gray-900', 'dark:hover:text-white');
+                        link.classList.add('bg-brand-50', 'dark:bg-brand-900/10', 'text-brand-700', 'dark:text-brand-400');
+                        dot.classList.remove('bg-gray-300', 'dark:bg-gray-600', 'group-hover:bg-gray-400');
+                        dot.classList.add('bg-brand-500');
+                    } else {
+                        link.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'hover:text-gray-900', 'dark:hover:text-white');
+                        link.classList.remove('bg-brand-50', 'dark:bg-brand-900/10', 'text-brand-700', 'dark:text-brand-400');
+                        dot.classList.add('bg-gray-300', 'dark:bg-gray-600', 'group-hover:bg-gray-400');
+                        dot.classList.remove('bg-brand-500');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                // Set the trigger line to be roughly 1/3 down the viewport, or at least 150px
+                const triggerPoint = window.scrollY + Math.max(150, window.innerHeight * 0.3);
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (triggerPoint >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                // Fallback: If user scrolled to the absolute bottom of the page, activate the last section
+                if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10) {
+                    current = sections[sections.length - 1].getAttribute('id');
+                }
+                
+                if (current) {
+                    activateNav(current);
+                }
+            });
+
+            // Trigger initially to set correct state if page is loaded scrolled down
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+
+</html>

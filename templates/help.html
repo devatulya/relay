@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Help Center - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="/docs"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Docs</a>
+                    <div class="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                    <a href="/"
+                        class="ml-2 inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-semibold rounded-lg text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:opacity-90 transition-all shadow-sm">
+                        Go to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Help Center</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">Answers to common questions about your outreach tools.
+            </p>
+        </div>
+
+        <div class="mb-16">
+            <div class="relative max-w-xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-gray-400">search</span>
+                </div>
+                <input type="text"
+                    class="block w-full pl-11 pr-4 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all shadow-sm"
+                    placeholder="Search for answers...">
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50"
+                open>
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">How do I start outreach?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Navigate to the main dashboard.</li>
+                        <li>Ensure the dedicated browser window for WhatsApp Web is open and logged in.</li>
+                        <li>Input your campaign details (Brand Name, Niche, Budget, Deliverables, etc.).</li>
+                        <li>Click <strong>"Launch Automation"</strong>.</li>
+                        <li>The system will direct you to a <strong>Preview Stage</strong>, where you can verify matching creators and calculated payouts.</li>
+                        <li>Review the list, optionally uncheck any creators you want to skip, and confirm the dispatch.</li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- FAQ 2 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">What if WhatsApp is not connected?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    The system detects session status automatically. If disconnected, it will present a <strong>QR Code</strong> on the screen. Scan this with your mobile device (WhatsApp &gt; Linked Devices) to re-authenticate properly before launching campaigns.
+                </div>
+            </details>
+
+            <!-- FAQ 3 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">What if a creator was already contacted?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    We maintain a "Last Contacted" timestamp in your Google Sheet. The system comprehensively filters out any creator contacted within the mandatory cooldown period (default: 30 days) ensuring we strictly prevent spamming or burning bridges.
+                </div>
+            </details>
+
+            <!-- FAQ 4 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">How is the creator payout calculated?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    The payout calculation relies on two variables: your specified campaign budget, and the creator's requested rate. The system computes a Base Price by taking the <strong>minimum</strong> of those two values. The Final Total Payout offered is that Base Price multiplied by the number of deliverables.
+                </div>
+            </details>
+
+            <!-- FAQ 5 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">What happens if a product is non-retainable?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    During setup, you specify if the product is retainable. If you select "No", the system automatically injects a specific waiver text block into the message template, making it abundantly clear up-front that the creator must securely return the product after filming.
+                </div>
+            </details>
+
+            <!-- FAQ 6 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">Can I remove creators from the outreach list before sending?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    Yes! Before any message is fired, you enter the <strong>Preview Stage</strong> interface. This view plots all matched outreach targets and allows you to manually uncheck out-of-scope creators from the dispatch queue.
+                </div>
+            </details>
+
+            <!-- FAQ 7 -->
+            <details
+                class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden transition-all hover:border-brand-300/50">
+                <summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+                    <span class="font-bold text-gray-900 dark:text-white text-lg">Who handles replies?</span>
+                    <span
+                        class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div
+                    class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+                    Influenze Relay is a <strong>one-way outreach tool</strong> intentionally. It does not scrape or read incoming messages for your privacy and security. It is your team's responsibility to monitor the active WhatsApp account.
+                </div>
+            </details>
+        </div>
+
+        <div class="mt-16 text-center">
+            <p class="text-gray-500 mb-6">Still under development? Report issues directly.</p>
+            <a href="https://wa.me/919691769385?text=Hi%20Atulya,%20I%20have%20an%20issue%20with%20Influenze%20Relay." target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-brand-700 bg-brand-100 dark:bg-brand-900/30 dark:text-brand-300 hover:bg-brand-200 dark:hover:bg-brand-900/50 transition-colors">
+                <span class="material-symbols-outlined mr-2">chat</span>
+                Message on WhatsApp
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="py-12 mt-12 text-center text-gray-500 text-sm">
+        © 2026 Influenze Relay. Internal Use Only.
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+
+</html>

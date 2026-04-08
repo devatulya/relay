@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>New Campaign - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300"
+                        viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="20" r="5" fill="#4F46E5" />
+                        <circle cx="30" cy="10" r="5" fill="#4F46E5" />
+                        <circle cx="50" cy="20" r="5" fill="#4F46E5" />
+                        <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="/docs"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Docs</a>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                    <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center ml-2 border border-gray-300 dark:border-gray-600">
+                        <span class="material-symbols-outlined text-xl text-gray-500 dark:text-gray-400">person</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">New Outreach Campaign</h1>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">Configure your targeting parameters and message
+                        template.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                        WhatsApp Connected
+                    </span>
+                </div>
+            </div>
+
+            <form id="campaign-form" onsubmit="handleFormSubmit(event)" class="space-y-8">
+
+                <!-- Section 1: Campaign Basics -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-brand-50 dark:bg-brand-900/20 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                            <span class="material-symbols-outlined text-lg">tune</span>
+                        </div>
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white">Targeting Parameters</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Brand Type -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Brand Type</label>
+                            <input type="text" name="brand_type" id="brand_type" placeholder="e.g. D2C Fashion" required
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm h-12">
+                        </div>
+
+                        <!-- Budget (INR) -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Max Budget
+                                (INR)</label>
+                            <div class="relative rounded-xl shadow-sm">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="text-gray-500 sm:text-sm">₹</span>
+                                </div>
+                                <input type="number" name="budget" id="budget" placeholder="5000" min="0" required
+                                    class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 pl-7 focus:border-brand-500 focus:ring-brand-500 sm:text-sm h-12">
+                            </div>
+                        </div>
+
+                        <!-- Deliverables -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Deliverables
+                                (Number of Videos)</label>
+                            <input type="number" name="deliverables" id="deliverables" placeholder="e.g. 2" min="1"
+                                required
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 focus:border-brand-500 focus:ring-brand-500 sm:text-sm h-12">
+                        </div>
+
+                        <!-- Product Value -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Product Value
+                                (INR)</label>
+                            <div class="relative rounded-xl shadow-sm">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="text-gray-500 sm:text-sm">₹</span>
+                                </div>
+                                <input type="number" name="product_value" id="product_value" placeholder="1000" min="0"
+                                    required
+                                    class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 pl-7 focus:border-brand-500 focus:ring-brand-500 sm:text-sm h-12">
+                            </div>
+                        </div>
+
+                        <!-- Product Retainable -->
+                        <div class="col-span-full space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Product
+                                Retainable?</label>
+                            <div class="flex gap-3">
+                                <label
+                                    class="inline-flex items-center p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50 dark:has-[:checked]:bg-brand-900/20">
+                                    <input type="radio" name="product_retainable" id="retainable_yes" value="Yes"
+                                        class="h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">✅ Yes —
+                                        Product is retainable</span>
+                                </label>
+                                <label
+                                    class="inline-flex items-center p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-red-400 transition-colors has-[:checked]:border-red-400 has-[:checked]:bg-red-50 dark:has-[:checked]:bg-red-900/10">
+                                    <input type="radio" name="product_retainable" id="retainable_no" value="No"
+                                        class="h-4 w-4 border-gray-300 text-red-500 focus:ring-red-400">
+                                    <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">❌ No —
+                                        Product must be returned</span>
+                                </label>
+                                <label
+                                    class="inline-flex items-center p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-gray-400 transition-colors has-[:checked]:border-gray-400 has-[:checked]:bg-gray-100 dark:has-[:checked]:bg-gray-700/50">
+                                    <input type="radio" name="product_retainable" id="retainable_none" value="None"
+                                        class="h-4 w-4 border-gray-300 text-gray-500 focus:ring-gray-400">
+                                    <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">🚫 Not Included</span>
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <!-- Niches (Interactive) -->
+                        <div class="col-span-full space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Target
+                                Niche(s)</label>
+                            <div id="niche-container"
+                                class="w-full rounded-2xl border border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 p-2 flex flex-wrap gap-2 focus-within:ring-1 focus-within:ring-brand-500 focus-within:border-brand-500 cursor-text"
+                                onclick="document.getElementById('niche-input').focus()">
+                                <!-- Tags will be injected here -->
+                                <input type="text" id="niche-input" placeholder="Type and press Enter..."
+                                    class="border-0 bg-transparent p-1 text-sm focus:ring-0 placeholder-gray-400 dark:text-white flex-1 min-w-[150px]">
+                            </div>
+                            <input type="hidden" name="niches" id="niches-hidden">
+                        </div>
+
+                        <!-- Categories Checkboxes (A, B, C, D, X) -->
+                        <div class="col-span-full space-y-3">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Creator
+                                Categories</label>
+                            <div class="flex flex-wrap gap-4">
+                                <!-- A -->
+                                <label
+                                    class="inline-flex items-center p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors">
+                                    <input type="checkbox" name="categories" value="A"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Category A</span>
+                                </label>
+                                <!-- B -->
+                                <label
+                                    class="inline-flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors">
+                                    <input type="checkbox" name="categories" value="B"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Category B</span>
+                                </label>
+                                <!-- C -->
+                                <label
+                                    class="inline-flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors">
+                                    <input type="checkbox" name="categories" value="C"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Category C</span>
+                                </label>
+                                <!-- D -->
+                                <label
+                                    class="inline-flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors">
+                                    <input type="checkbox" name="categories" value="D"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Category D</span>
+                                </label>
+                                <!-- X -->
+                                <label
+                                    class="inline-flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 cursor-pointer hover:border-brand-500 transition-colors">
+                                    <input type="checkbox" name="categories" value="X"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Category X</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Data Source & Template -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                            <span class="material-symbols-outlined text-lg">database</span>
+                        </div>
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white">Data & Messaging</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Google Sheet Link -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Google Sheet
+                                URL</label>
+                            <div class="flex gap-2">
+                                <div class="relative flex-grow">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="material-symbols-outlined text-gray-400 text-lg">link</span>
+                                    </div>
+                                    <input type="url" name="google_sheet_url" id="google_sheet_url"
+                                        placeholder="https://docs.google.com/spreadsheets/d/..." required
+                                        class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 pl-10 focus:border-brand-500 focus:ring-brand-500 sm:text-sm h-12">
+                                </div>
+                                <button type="button" onclick="verifySheet()" id="verify-btn"
+                                    class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-2xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 focus:outline-none transition-colors">
+                                    Verify
+                                </button>
+                                <span id="verify-status"
+                                    class="hidden items-center px-3 py-2 text-sm font-medium rounded-2xl"></span>
+                            </div>
+                            <p class="text-xs text-gray-500">Sheet must be publicly viewable or shared with the service
+                                account.</p>
+                        </div>
+
+                        <!-- Message Template -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message
+                                    Template</label>
+                                <button type="button" onclick="insertVariable()"
+                                    class="text-xs text-brand-600 cursor-pointer hover:underline focus:outline-none">
+                                    Insert Variable
+                                </button>
+                            </div>
+                            <textarea name="outreach_message" id="outreach_message" rows="5" required
+                                placeholder="Hi {{Name}}, I saw your content about {{Niche}} and loved it! We are looking for creators..."
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-700 dark:bg-gray-800/50 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm"></textarea>
+                            <p class="text-xs text-gray-500">Use <code
+                                    class="bg-gray-100 dark:bg-gray-800 px-1 rounded">{{ '{{Variable}}' }}</code> syntax
+                                to pull
+                                data from columns.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Footer -->
+                <div class="flex justify-end pt-4">
+                    <button type="submit" id="submit-btn"
+                        class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-white bg-brand-600 hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/20 active:scale-95">
+                        <span class="material-symbols-outlined mr-2">rocket_launch</span>
+                        Launch Automation
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // --- Niche Tag Logic ---
+        const nicheInput = document.getElementById('niche-input');
+        const nicheContainer = document.getElementById('niche-container');
+        const nichesHidden = document.getElementById('niches-hidden');
+        let niches = [];
+
+        // niches are now empty by default
+
+        nicheInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const val = this.value.trim();
+                if (val && !niches.includes(val)) {
+                    addNiche(val);
+                    this.value = '';
+                }
+            } else if (e.key === 'Backspace' && !this.value && niches.length > 0) {
+                removeNiche(niches[niches.length - 1]);
+            }
+        });
+
+        function addNiche(text) {
+            niches.push(text);
+            updateHiddenInput();
+
+            const tag = document.createElement('span');
+            tag.className = "inline-flex items-center gap-1 rounded-lg bg-brand-50 dark:bg-brand-900/20 px-2 py-1 text-sm font-medium text-brand-700 dark:text-brand-300 animate-fadeIn";
+            tag.innerHTML = `
+                ${text}
+                <button type="button" onclick="removeNiche('${text}')" class="text-brand-500 hover:text-brand-700 focus:outline-none">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+            `;
+            // Insert before the input
+            nicheContainer.insertBefore(tag, nicheInput);
+        }
+
+        function removeNiche(text) {
+            niches = niches.filter(n => n !== text);
+            updateHiddenInput();
+
+            // Re-render tags (simpler than finding specific node for now, or could find and remove)
+            // For simplicity, let's just clear and re-render excluding input
+            // Actually, finding via text content is safer
+            const tags = nicheContainer.querySelectorAll('span.inline-flex');
+            tags.forEach(tag => {
+                if (tag.textContent.trim().startsWith(text)) {
+                    tag.remove();
+                }
+            });
+        }
+
+        function updateHiddenInput() {
+            nichesHidden.value = JSON.stringify(niches);
+        }
+
+        // --- Insert Variable Logic ---
+        function insertVariable() {
+            const textarea = document.getElementById('outreach_message');
+            const variable = "{{Variable}}";
+
+            // Insert at cursor
+            if (textarea.selectionStart || textarea.selectionStart == '0') {
+                var startPos = textarea.selectionStart;
+                var endPos = textarea.selectionEnd;
+                textarea.value = textarea.value.substring(0, startPos)
+                    + variable
+                    + textarea.value.substring(endPos, textarea.value.length);
+
+                // Move cursor after variable
+                textarea.selectionStart = startPos + variable.length;
+                textarea.selectionEnd = startPos + variable.length;
+                textarea.focus();
+            } else {
+                textarea.value += variable;
+                textarea.focus();
+            }
+        }
+
+        // --- Verify Sheet Logic ---
+        async function verifySheet() {
+            const urlInput = document.getElementById('google_sheet_url');
+            const verifyBtn = document.getElementById('verify-btn');
+            const statusSpan = document.getElementById('verify-status');
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                alert("Please enter a Google Sheet URL first.");
+                return;
+            }
+
+            try {
+                // Update UI to loading state
+                verifyBtn.disabled = true;
+                verifyBtn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span>`;
+                statusSpan.className = "hidden";
+
+                const response = await fetch('/verify-sheet', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error("JSON Parse Error:", jsonError);
+                    alert("Server returned invalid JSON. Status: " + response.status);
+                    return;
+                }
+
+                // Show status message
+                statusSpan.classList.remove('hidden');
+                statusSpan.classList.add('inline-flex');
+
+                if (response.ok && result.status === "success") {
+                    verifyBtn.classList.add('hidden');
+                    statusSpan.classList.add('bg-brand-100/10', 'text-brand-600', 'dark:text-brand-400', 'border', 'border-brand-500/20', 'backdrop-blur-sm', 'rounded-full', 'shadow-[0_0_15px_rgba(36,214,101,0.1)]', 'animate-in', 'fade-in', 'zoom-in', 'duration-500');
+                    statusSpan.innerHTML = `
+                        <div class="flex items-center gap-2 px-1">
+                            <div class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                            </div>
+                            <span class="font-bold tracking-widest uppercase text-[11px]">Verified</span>
+                        </div>
+                    `;
+
+                    // Auto-fill template if empty
+                    const textarea = document.getElementById('outreach_message');
+                    if (!textarea.value.trim()) {
+                        // Use a function to build the template so Jinja2 doesn't touch {{vars}}
+                        const LB = '{' + '{', RB = '}' + '}';
+                        textarea.value = [
+                            `Hey, ${LB}name${RB}! 👋`,
+                            `I'm from the team Influenze and we are collaborating with selected creators for a ${LB}niche${RB} campaign and really like your content style.`,
+                            ``,
+                            `📌 Collab details:`,
+                            `* Deliverables - ${LB}deliverables${RB} Instagram reels`,
+                            `* Payout: ₹${LB}rate${RB}`,
+                            `• ${LB}retainable_line${RB}`,
+                            `* Script and editing will be provided, you just need to share us the raw videos.`,
+                            `* Collab posting will be mandatory.`,
+                            `* Ad rights included `,
+                            ``,
+                            `We’re looking for natural, aesthetic, lifestyle-focused reels rather than hard-selling ads.`,
+                            ``,
+                            `If this sounds interesting, please reply with:`,
+                            `- your full name`,
+                            `- your contact email `,
+                            `- your contact number`,
+                            ``,
+                            `Looking forward to connecting ✨`,
+                            `— Team Influenze`,
+                        ].join('\n');
+                    }
+                } else {
+                    statusSpan.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-100', 'rounded-full', 'dark:bg-red-900/10', 'dark:text-red-400', 'dark:border-red-900/30');
+                    statusSpan.innerHTML = `<span class="material-symbols-outlined text-sm mr-1">error</span> Verification Failed`;
+                    alert(result.message || "Failed to verify sheet.");
+                }
+            } catch (error) {
+                console.error("Verification network/fetch error:", error);
+                statusSpan.classList.remove('hidden');
+                statusSpan.classList.add('inline-flex', 'bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-400');
+                statusSpan.innerHTML = `<span class="material-symbols-outlined text-sm mr-1">error</span> Error`;
+                alert("Network error: " + error.message);
+            } finally {
+                verifyBtn.disabled = false;
+                if (!statusSpan.classList.contains('bg-green-100')) {
+                    verifyBtn.innerHTML = 'Verify';
+                }
+            }
+        }
+
+        // --- Form Submission Logic ---
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalContent = btn.innerHTML;
+
+            // If user typed a niche but forgot to press Enter, add it automatically
+            const nicheInputVal = document.getElementById('niche-input').value.trim();
+            if (nicheInputVal && !niches.includes(nicheInputVal)) {
+                niches.push(nicheInputVal);
+                updateNicheTags(); // Updates UI and hidden input just in case
+            }
+
+            // Basic Validation
+            if (niches.length === 0) {
+                alert("Please add at least one niche.");
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = `<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Launching...`;
+
+                // Gather Data
+                const formData = new FormData(e.target);
+                const payload = {
+                    brand_type: formData.get('brand_type'),
+                    max_budget: parseFloat(formData.get('budget')) || 0,
+                    deliverables: parseInt(formData.get('deliverables')) || 1,
+                    product_value: parseFloat(formData.get('product_value')) || 0,
+                    product_retainable: formData.get('product_retainable') || 'Yes',
+                    target_niches: niches,
+                    creator_categories: Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(cb => `Category ${cb.value}`),
+                    google_sheet_url: formData.get('google_sheet_url'),
+                    message_template: formData.get('outreach_message')
+                };
+
+                // Send Payload
+                const response = await fetch('/launch-automation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    if (result.results && result.results.length > 0) {
+                        sessionStorage.setItem('previewData', JSON.stringify(result.results));
+                        sessionStorage.setItem('campaignPayload', JSON.stringify(payload));
+                        window.location.href = '/preview';
+                    } else {
+                        alert(result.message || "No eligible creators found! Please broaden your filters.");
+                        btn.disabled = false;
+                        btn.innerHTML = originalContent;
+                    }
+                } else {
+                    throw new Error(result.error || result.message || "Unknown error");
+                }
+
+            } catch (error) {
+                console.error("Submission error:", error);
+                alert("Failed to start outreach: " + error.message);
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+
+</html>

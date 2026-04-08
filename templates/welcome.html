@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Welcome - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 40px -10px rgba(36, 214, 101, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="/docs"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Docs</a>
+                    <a href="/help"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Support</a>
+                    <div class="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Left Content -->
+                <div class="text-left">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-brand-50 dark:bg-brand-900/10 border border-brand-100 dark:border-brand-900/30 rounded-full px-3 py-1 mb-8">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        <span
+                            class="text-xs font-semibold text-brand-700 dark:text-brand-400 uppercase tracking-wide">Internal
+                            Tool v1.2</span>
+                    </div>
+
+                    <h1
+                        class="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight mb-6">
+                        Automate Outreach.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700">Without
+                            the Chaos.</span>
+                    </h1>
+
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-lg leading-relaxed">
+                        The secure bridge between your Google Sheets and WhatsApp. Executing personalized campaigns with
+                        human-like precision.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/connect"
+                            class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:scale-105 transition-transform shadow-lg hover:shadow-xl">
+                            Start Campaign
+                            <span class="material-symbols-outlined ml-2">arrow_forward</span>
+                        </a>
+                        <a href="/docs"
+                            class="inline-flex items-center justify-center px-8 py-4 border border-gray-200 dark:border-gray-800 text-base font-bold rounded-xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <span class="material-symbols-outlined mr-2">menu_book</span>
+                            Documentation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="relative hidden lg:block">
+                    <div
+                        class="absolute inset-0 bg-brand-500/20 blur-3xl rounded-full opacity-30 transform translate-x-12 translate-y-12">
+                    </div>
+                    <div
+                        class="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <!-- Pseudo-browser chrome -->
+                        <div
+                            class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        </div>
+                        <div class="p-8 space-y-6">
+                            <!-- Feature 1 -->
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 flex-shrink-0">
+                                    <span class="material-symbols-outlined">table_view</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 dark:text-white">Spreadsheet Sync</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Reads target data directly from
+                                        your master internal Google Sheet.</p>
+                                </div>
+                            </div>
+                            <!-- Feature 2 -->
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                                    <span class="material-symbols-outlined">smart_toy</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 dark:text-white">Smart Delays</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Intelligent 40-second pauses
+                                        between messages to prevent bans.</p>
+                                </div>
+                            </div>
+                            <!-- Feature 3 -->
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 flex-shrink-0">
+                                    <span class="material-symbols-outlined">lock</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 dark:text-white">Local Execution</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Running securely on `localhost`.
+                                        No data leaves your machine.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 py-8">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm">© 2026 Influenze Relay. Internal Use Only.</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Developed by Atulya Sahu</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+
+</html>

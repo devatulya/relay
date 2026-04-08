@@ -1,0 +1,11 @@
+flask
+playwright
+pandas
+gspread
+google-auth
+pytest
+pytest-asyncio
+quart
+uvicorn
+gunicorn
+python-dotenv

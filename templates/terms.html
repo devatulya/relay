@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Terms of Service - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="/docs"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Docs</a>
+                    <div class="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <div class="mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Terms of Service</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">By using this tool, you accept the following
+                responsibilities.</p>
+        </div>
+
+        <div
+            class="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/30 rounded-xl p-6 mb-12 flex items-start gap-4">
+            <span class="material-symbols-outlined text-amber-600 dark:text-amber-500 mt-1">warning</span>
+            <div>
+                <h4 class="font-bold text-amber-900 dark:text-amber-100 text-sm uppercase tracking-wide mb-1">Strict
+                    Internal Use Policy</h4>
+                <p class="text-amber-800 dark:text-amber-200/80 text-sm leading-relaxed">
+                    This software is licensed exclusively for authorized internal team members. Sharing credentials or
+                    dashboard access with external parties is a violation of company protocol.
+                </p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Checklist Item 1 -->
+            <label
+                class="flex items-start p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-default transition-all hover:border-brand-500/50">
+                <div class="flex-shrink-0 mr-4">
+                    <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-sm">check</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-1">Legitimate Outreach Only</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Use this system solely for genuine partnership
+                        inquiries. Unsolicited spamming is strictly prohibited.</p>
+                </div>
+            </label>
+
+            <!-- Checklist Item 2 -->
+            <label
+                class="flex items-start p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-default transition-all hover:border-brand-500/50">
+                <div class="flex-shrink-0 mr-4">
+                    <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-sm">check</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-1">Zero-Tolerace for Abuse</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Any misuse that jeopardizes our WhatsApp
+                        Business status will result in immediate access revocation.</p>
+                </div>
+            </label>
+
+            <!-- Checklist Item 3 -->
+            <label
+                class="flex items-start p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-default transition-all hover:border-brand-500/50">
+                <div class="flex-shrink-0 mr-4">
+                    <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-sm">check</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-1">Data Integrity</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">You are responsible for the accuracy of data in
+                        the connected Google Sheet to ensure personalized communication.</p>
+                </div>
+            </label>
+
+            <!-- Checklist Item 4 -->
+            <label
+                class="flex items-start p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-default transition-all hover:border-brand-500/50">
+                <div class="flex-shrink-0 mr-4">
+                    <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-sm">check</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-1">Active Monitoring</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Automation is not unsupervised. Maintain
+                        oversight of the running process to intervene if necessary.</p>
+                </div>
+            </label>
+        </div>
+
+    </main>
+
+    <footer class="py-12 mt-12 text-center text-gray-500 text-sm">
+        © 2026 Influenze Relay. Internal Use Only.
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+
+</html>

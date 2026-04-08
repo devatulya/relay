@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Campaign Summary - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(36, 214, 101, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                    <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center ml-2 border border-gray-300 dark:border-gray-600">
+                        <span class="material-symbols-outlined text-xl text-gray-500 dark:text-gray-400">person</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl w-full">
+
+            <div
+                class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden text-center p-12">
+
+                <div
+                    class="w-20 h-20 bg-brand-50 dark:bg-brand-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl text-brand-500">check_circle</span>
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Campaign Complete!</h1>
+                <p id="campaign-desc" class="text-gray-500 dark:text-gray-400 mb-10">Outreach cycle finished.</p>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    <div
+                        class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                        <div id="stat-sent" class="text-2xl font-bold text-gray-900 dark:text-white">-</div>
+                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-400 mt-1">Sent</div>
+                    </div>
+                    <div
+                        class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                        <div id="stat-delivery" class="text-2xl font-bold text-gray-900 dark:text-white">-</div>
+                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-400 mt-1">Delivery Success</div>
+                    </div>
+                    <div
+                        class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                        <div id="stat-duration" class="text-2xl font-bold text-gray-900 dark:text-white">-</div>
+                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-400 mt-1">Duration</div>
+                    </div>
+                    <div
+                        class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                        <div id="stat-errors" class="text-2xl font-bold text-gray-900 dark:text-white">0</div>
+                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-400 mt-1">Errors</div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="window.location.href='/form'"
+                        class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-xl text-white bg-brand-600 hover:bg-brand-700 transition-colors shadow-lg shadow-brand-500/20">
+                        <span class="material-symbols-outlined mr-2">add</span>
+                        New Campaign
+                    </button>
+                    <button id="export-btn" onclick="downloadCSV()"
+                        class="inline-flex items-center justify-center px-8 py-3 border border-gray-200 dark:border-gray-800 text-base font-bold rounded-xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <span class="material-symbols-outlined mr-2">download</span>
+                        Export Logic
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer
+        class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 py-8 text-center text-sm text-gray-500">
+        © 2026 Influenze Relay.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const results = JSON.parse(sessionStorage.getItem('lastCampaignResults') || '{}');
+            const payload = JSON.parse(sessionStorage.getItem('campaignPayload') || '{}');
+            
+            // Set Brand Name
+            const brandName = payload.brand_name || 'Campaign';
+            document.getElementById('campaign-desc').textContent = `Outreach cycle finished for "${brandName}".`;
+            
+            // Set Stats
+            const sent = results.sent || 0;
+            const total = results.total || 0;
+            const duration = results.duration || 0;
+            
+            document.getElementById('stat-sent').textContent = sent;
+            
+            // Delivery success % relative to intended total
+            const deliveryPct = total > 0 ? Math.round((sent / total) * 100) : 0;
+            document.getElementById('stat-delivery').textContent = `${deliveryPct}%`;
+            
+            // Duration logic
+            if (duration < 60) {
+                document.getElementById('stat-duration').textContent = `${duration}s`;
+            } else {
+                document.getElementById('stat-duration').textContent = `${Math.floor(duration / 60)}m`;
+            }
+
+            // Results handle
+            window.campaignResultsList = results.results || [];
+        });
+
+        function downloadCSV() {
+            if (!window.campaignResultsList || window.campaignResultsList.length === 0) {
+                alert("No results to export.");
+                return;
+            }
+
+            const brandName = JSON.parse(sessionStorage.getItem('campaignPayload') || '{}').brand_name || 'Campaign';
+            const headers = ["Name", "Number", "IG Link", "Date Time When Sent", "Sent or Not"];
+            const rows = window.campaignResultsList.map(r => [
+                r.name,
+                r.number,
+                r.ig_link,
+                r.timestamp,
+                r.sent
+            ]);
+
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + headers.join(",") + "\n"
+                + rows.map(e => e.join(",")).join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Outreach_Results_${brandName.replace(/\s+/g, '_')}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+
+</html>

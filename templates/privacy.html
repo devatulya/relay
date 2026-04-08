@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Privacy Policy - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="/docs"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors px-3 py-2">Docs</a>
+                    <div class="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <div class="mb-16">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Privacy Policy</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Last updated: February 2026</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- Section 1 -->
+            <section
+                class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+                <div class="flex items-start gap-6">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-900/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-600 dark:text-brand-400">database</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Data Storage</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            We do not maintain a mirrored database. All creator information persists solely within the
+                            Google Sheet you connect. Influenze Relay acts as a transient processor, reading data only
+                            at the moment of outreach execution.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section
+                class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+                <div class="flex items-start gap-6">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-900/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-600 dark:text-brand-400">share_off</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Zero External Sharing</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Your campaign data is your competitive advantage. We strictly adhere to a zero-sharing
+                            policy. No data is sold, anonymized for trends, or transmitted to third-party analytics
+                            vendors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section
+                class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+                <div class="flex items-start gap-6">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-900/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-600 dark:text-brand-400">encrypted</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Direct Communication</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Messages are sent end-to-end encrypted via WhatsApp's standard protocol. Influenze Relay
+                            does not and cannot intercept the content of your messages once they are dispatched.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section
+                class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+                <div class="flex items-start gap-6">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-gray-500">visibility_off</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">No Reply Tracking</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            To ensure total privacy of negotiation details, the system ignores incoming messages. All
+                            replies must be managed manually on your device. We do not store or process creator
+                            responses.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="py-12 mt-12 text-center text-gray-500 text-sm">
+        © 2026 Influenze Relay. Internal Use Only.
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+
+</html>

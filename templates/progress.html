@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Campaign Running - Influenze Relay</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(36, 214, 101, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .terminal-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .terminal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">Influenze Relay <span
+                            class="text-xs font-normal text-gray-500 ml-2 border border-gray-200 dark:border-gray-700 px-2 py-0.5 rounded">Running...</span></span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                        aria-label="Toggle theme">
+                        <span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto space-y-8">
+
+            <!-- Live Status Card -->
+            <div
+                class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden">
+                <div
+                    class="px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50 dark:bg-gray-800/20">
+                    <div class="flex items-center gap-3">
+                        <span class="relative flex h-3 w-3">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+                        </span>
+                        <span
+                            class="font-mono text-sm font-bold text-brand-600 dark:text-brand-400 tracking-wider uppercase">Live
+                            Execution</span>
+                    </div>
+                    <div class="text-xs font-mono text-gray-400">PID: 8192</div>
+                </div>
+
+                <div class="p-8 md:p-12 text-center">
+
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-100 dark:bg-gray-800 rounded-full mb-6 border-4 border-white dark:border-gray-700 shadow-lg relative">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+J&background=random"
+                            class="w-full h-full rounded-full object-cover">
+                        <div
+                            class="absolute bottom-0 right-0 w-8 h-8 bg-brand-500 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900">
+                            <span class="material-symbols-outlined text-white text-xs">send</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Contacting <span
+                            class="text-brand-600">@sarahjones</span>...</h2>
+                    <p class="text-gray-500 dark:text-gray-400">Applying message template variation B.</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="px-8 pb-8">
+                    <div class="flex justify-between items-end mb-2">
+                        <div class="text-sm font-medium text-gray-700 dark:text-gray-300">Overall Progress</div>
+                        <div id="progress-stats-text" class="text-2xl font-bold text-gray-900 dark:text-white">0 <span
+                                class="text-gray-400 text-lg font-normal">/ -</span></div>
+                    </div>
+                    <div class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
+                        <div id="progress-bar-fill" class="bg-brand-500 h-3 rounded-full transition-all duration-500 shadow-glow"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Output -->
+            <div
+                class="bg-[#0c0c0c] rounded-xl border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs md:text-sm">
+                <div class="px-4 py-2 bg-[#1a1a1a] border-b border-gray-800 flex items-center gap-2">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                    </div>
+                    <span class="text-gray-500 ml-2">runner.log</span>
+                </div>
+                <div class="p-4 h-64 overflow-y-auto terminal-scroll space-y-1 text-gray-300">
+                    <div class="flex gap-3"><span class="text-gray-600">[14:20:01]</span> <span
+                            class="text-blue-400">INFO</span> <span>Process started with PID 8192</span></div>
+                    <div class="flex gap-3"><span class="text-gray-600">[14:20:02]</span> <span
+                            class="text-blue-400">INFO</span> <span>Loaded 50 rows from Google Sheet</span></div>
+                    <div class="flex gap-3"><span class="text-gray-600">[14:20:05]</span> <span
+                            class="text-brand-500">SUCCESS</span> <span>Message sent to +15550123 (Sarah J)</span></div>
+                    <div class="flex gap-3"><span class="text-gray-600">[14:20:06]</span> <span
+                            class="text-purple-400">WAIT</span> <span>Cooling down for 40s...</span></div>
+                    <div class="flex gap-3 opacity-50"><span class="text-gray-600">[14:20:46]</span> <span
+                            class="text-gray-400">PENDING</span> <span>Next target: @mike_vlogs</span></div>
+                </div>
+            </div>
+
+            <!-- Stop Button -->
+            <div class="flex justify-center">
+                <button onclick="stopCampaign()" id="stop-btn"
+                    class="group relative inline-flex items-center justify-center px-8 py-3 border border-red-200 dark:border-red-900/30 text-base font-bold rounded-xl text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 transition-all">
+                    <span class="material-symbols-outlined mr-2 group-hover:animate-pulse">stop_circle</span>
+                    Emergency Stop
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+
+        // --- Polling Logic ---
+        const statusEl = document.querySelector('.font-mono.text-sm.font-bold'); // "Live Execution"
+        const targetImg = document.querySelector('img[src*="ui-avatars"]');
+        const targetName = document.querySelector('h2 > span'); // @sarahjones
+        const targetDesc = document.querySelector('h2 + p'); // applying message...
+        const progressText = document.getElementById('progress-stats-text'); // 14 / 50
+        const progressBar = document.getElementById('progress-bar-fill');
+        const terminal = document.querySelector('.terminal-scroll');
+
+        let isCompleted = false;
+
+        async function fetchStatus() {
+            if (isCompleted) return;
+
+            try {
+                const response = await fetch('/status');
+                const data = await response.json();
+
+                // 1. Update Progress
+                const sent = data.sent_count || 0;
+                const total = data.total_creators || 1; // Avoid divide by zero
+                const percent = Math.min(100, Math.round((sent / total) * 100));
+
+                // If total is 0 awaiting init, shows 0/0
+                const displayTotal = data.total_creators || "-";
+
+                progressText.innerHTML = `${sent} <span class="text-gray-400 text-lg font-normal">/ ${displayTotal}</span>`;
+                progressBar.style.width = `${percent}%`;
+
+                // 2. Update Target Info
+                if (data.current_target) {
+                    targetName.textContent = "@" + data.current_target.replace(/\s+/g, '').toLowerCase();
+                    targetDesc.textContent = `Contacting ${data.current_target}...`;
+                    // Update avatar if we had image URL, but for now random is fine or static
+                    targetImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.current_target)}&background=random`;
+                } else {
+                    targetName.textContent = "...";
+                    targetDesc.textContent = "Waiting for next target...";
+                }
+
+                // 3. Update Logs
+                // Clear and re-render logs (or append new ones?)
+                // Replacing for simplicity as backend limits to 50
+                if (data.logs && data.logs.length > 0) {
+                    terminal.innerHTML = data.logs.map(log => {
+                        let colorClass = "text-blue-400";
+                        if (log.level === "SUCCESS") colorClass = "text-brand-500";
+                        if (log.level === "ERROR") colorClass = "text-red-500";
+                        if (log.level === "WARNING") colorClass = "text-yellow-500";
+
+                        return `<div class="flex gap-3"><span class="text-gray-600">[${log.timestamp}]</span> <span class="${colorClass}">${log.level}</span> <span>${log.message}</span></div>`;
+                    }).join('');
+
+                    // Auto scroll
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+
+                // 4. Handle Completion / Stop
+                if (data.status === "completed" || data.status === "stopped") {
+                    isCompleted = true;
+                    
+                    // Store final results for Summary page
+                    sessionStorage.setItem('lastCampaignResults', JSON.stringify({
+                        sent: sent,
+                        total: data.total_creators,
+                        duration: data.duration || 0,
+                        status: data.status,
+                        results: data.results || []
+                    }));
+
+                    // Redirect to Summary
+                    setTimeout(() => {
+                        window.location.href = `/summary?sent=${sent}&total=${data.total_creators}&duration=${data.duration || 0}&status=${data.status}`;
+                    }, 1500); 
+                }
+
+                if (data.status === "error") {
+                    statusEl.textContent = "EXECUTION PAUSED (ERROR)";
+                    statusEl.classList.add("text-red-500");
+                }
+
+            } catch (error) {
+                console.error("Polling error:", error);
+            }
+        }
+
+        async function stopCampaign() {
+            if (confirm("Are you sure you want to stop the campaign immediately?")) {
+                try {
+                    const stopBtn = document.getElementById('stop-btn');
+                    stopBtn.disabled = true;
+                    stopBtn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Stopping...';
+                    
+                    await fetch('/stop-automation', { method: 'POST' });
+                    // The loop will pick up the stop flag, and then fetchStatus will handle the redirect
+                } catch (e) {
+                    console.error("Stop failed", e);
+                    window.location.href = '/summary'; // Fallback
+                }
+            }
+        }
+
+        // Poll every 1 second
+        setInterval(fetchStatus, 1000);
+
+        // Initial call
+        fetchStatus();
+    </script>
+</body>
+
+</html>

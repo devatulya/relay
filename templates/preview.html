@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Campaign - Influenze Relay</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#effef7',
+                            100: '#dafeec',
+                            200: '#b6fddc',
+                            300: '#7ef9c3',
+                            400: '#42ea9f',
+                            500: '#24d665', // Primary
+                            600: '#0eb14f',
+                            700: '#0d8b40',
+                            800: '#0f6e37',
+                            900: '#0d5a31',
+                            950: '#023219',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 40px -10px rgba(36, 214, 101, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Gray 950 */
+            color: #f3f4f6; /* Gray 100 */
+        }
+        
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7); /* Gray 900 with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .creator-message {
+            white-space: pre-wrap;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+        }
+        
+        .creator-message::-webkit-scrollbar {
+            width: 6px;
+        }
+        .creator-message::-webkit-scrollbar-thumb {
+            background-color: rgba(75, 85, 99, 0.5);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="/" class="flex items-center gap-2 group cursor-pointer" style="text-decoration:none;">
+                    <svg class="h-6 w-auto sm:h-8 group-hover:scale-105 transition-transform duration-300" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="20" r="5" fill="#4F46E5"/>
+                            <circle cx="30" cy="10" r="5" fill="#4F46E5"/>
+                            <circle cx="50" cy="20" r="5" fill="#4F46E5"/>
+                            <line x1="10" y1="20" x2="30" y2="10" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="30" y1="10" x2="50" y2="20" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-bold text-lg tracking-tight text-white">Influenze Relay</span>
+                </a>
+                <div>
+                    <a href="/form" class="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        Back to Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- Header Section -->
+        <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">Campaign Preview</h1>
+                <p class="text-slate-400">Review the vetted creators and their customized messages before launching.</p>
+            </div>
+            <div class="flex items-center gap-3 glass-panel px-4 py-2 rounded-xl">
+                <span class="material-symbols-outlined text-green-400">group</span>
+                <div>
+                    <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">Eligible Creators</div>
+                    <div class="text-xl font-bold" id="creator-count">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Creator Grid -->
+        <div id="creator-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-24">
+            <!-- Cards will be injected here via JS -->
+        </div>
+
+    </main>
+
+    <!-- Sticky Bottom Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 glass-panel border-t border-gray-800 py-4 px-4 sm:px-6 z-40 transform transition-transform duration-300 translate-y-0 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-gray-400 text-sm font-medium">
+                Make sure your phone is connected to WhatsApp Web.
+            </div>
+            <button id="send-btn" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-brand-500/20 transition-all flex items-center justify-center gap-2 transform hover:scale-[1.02] active:scale-95">
+                <span class="material-symbols-outlined">send</span>
+                <span id="send-btn-text">Start Sending Messages</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('creator-grid');
+            const countDisplay = document.getElementById('creator-count');
+            const sendBtn = document.getElementById('send-btn');
+            const sendBtnText = document.getElementById('send-btn-text');
+            
+            // Load from storage
+            let creators = [];
+            let payload = {};
+            
+            try {
+                creators = JSON.parse(sessionStorage.getItem('previewData') || '[]');
+                payload = JSON.parse(sessionStorage.getItem('campaignPayload') || '{}');
+            } catch(e) {
+                console.error("Failed to parse session data", e);
+            }
+
+            if (creators.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 5rem 0; color: #a1a1aa; background: rgba(30, 41, 59, 0.7); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">No creators found</h3>
+                        <p style="margin-bottom: 2rem;">No eligible creators match your criteria, or session expired.</p>
+                        <a href="/form" style="background: #334155; color: white; padding: 0.5rem 1.5rem; border-radius: 0.5rem; text-decoration: none;">Go Back to Edit</a>
+                    </div>
+                `;
+                sendBtn.disabled = true;
+                sendBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            function renderCreators() {
+                countDisplay.textContent = creators.length;
+                sendBtnText.textContent = `Start Sending ${creators.length} Messages`;
+                
+                if (creators.length === 0) {
+                    sendBtn.disabled = true;
+                    sendBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+
+                grid.innerHTML = '';
+                
+                creators.forEach((creator, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-panel rounded-2xl overflow-hidden flex flex-col transition-all hover:border-slate-500/50 group relative';
+                    
+                    card.innerHTML = `
+                        <!-- Header -->
+                        <div class="p-5 border-b border-gray-800 flex justify-between items-start bg-gray-900/50">
+                            <div>
+                                <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                                    ${creator.creator_name}
+                                </h3>
+                                <div class="flex items-center gap-3 mt-1.5 text-sm text-gray-400 flex-wrap">
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">call</span> ${creator.phone}</span>
+                                    ${creator.niche ? `<span class="px-2 py-0.5 rounded-full bg-gray-800 text-gray-300 text-xs border border-gray-700">${creator.niche}</span>` : ''}
+                                    ${creator.ig_link ? `<a href="${creator.ig_link.startsWith('http') ? creator.ig_link : 'https://' + creator.ig_link}" target="_blank" class="flex items-center gap-1 text-brand-400 hover:text-brand-300 transition-colors"><span class="material-symbols-outlined text-[16px]">link</span> IG Link</a>` : ''}
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500 uppercase font-semibold mb-1">Final Payout</div>
+                                <div class="text-brand-400 font-bold bg-brand-400/10 px-3 py-1 rounded-lg inline-block border border-brand-400/20">₹${creator.final_price}</div>
+                            </div>
+                        </div>
+
+                        <!-- Message Body -->
+                        <div class="p-5 flex-grow">
+                            <div class="text-xs text-gray-500 uppercase font-semibold mb-3 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">chat</span> Compiled Message
+                            </div>
+                            <div class="bg-gray-950/80 rounded-xl p-4 text-sm text-gray-300 font-mono leading-relaxed creator-message h-48 overflow-y-auto border border-black/50 shadow-inner">${escapeHtml(creator.final_message)}</div>
+                        </div>
+
+                        <!-- Footer Actions -->
+                        <div class="p-4 border-t border-white/5 bg-slate-800/20 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="removeCreator(${index})" class="text-red-400 hover:text-red-300 hover:bg-red-400/10 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[18px]">delete</span>
+                                Remove from list
+                            </button>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+            }
+
+            // Expose removal function globally
+            window.removeCreator = (index) => {
+                creators.splice(index, 1);
+                // Update session storage so it persists if they refresh
+                sessionStorage.setItem('previewData', JSON.stringify(creators));
+                renderCreators();
+            };
+
+            function escapeHtml(unsafe) {
+                return (unsafe || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            }
+
+            // Initial render
+            renderCreators();
+
+            // Handle send action
+            sendBtn.addEventListener('click', async () => {
+                try {
+                    sendBtn.disabled = true;
+                    sendBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Launching...`;
+                    
+                    // Attach final filtered creators to the payload
+                    payload.creators = creators;
+
+                    const response = await fetch('/execute-automation', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        // Success -> redirect to progress
+                        window.location.href = '/progress';
+                    } else {
+                        throw new Error(result.error || result.message || "Failed to start execution");
+                    }
+                } catch (err) {
+                    alert('Error: ' + err.message);
+                    sendBtn.disabled = false;
+                    sendBtn.innerHTML = `<span class="material-symbols-outlined">send</span> ` + sendBtnText.outerHTML;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
