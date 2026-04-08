@@ -23,12 +23,13 @@ class WhatsAppBot:
         Launches the browser and opens WhatsApp Web (Async).
         """
         try:
+            self.playwright = await async_playwright().start()
+            
             # Use passed param if provided, otherwise default from ENV
             actual_headless = headless if headless is not None else self.default_headless
             
             self.context = await self.playwright.chromium.launch_persistent_context(
                 user_data_dir="wa_session",
-                channel="chrome", 
                 headless=actual_headless,
                 no_viewport=True,
                 args=["--start-maximized", "--disable-blink-features=AutomationControlled"]
