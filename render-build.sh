@@ -6,6 +6,5 @@ set -o errexit
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Install Playwright browsers and its system dependencies
-# In Render, we might need to use playwright install --with-deps chromium
-playwright install --with-deps chromium
+# Install Playwright browsers (System deps handled by nixpacks.toml)
+playwright install chromium
