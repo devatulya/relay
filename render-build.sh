@@ -6,5 +6,6 @@ set -o errexit
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Install Playwright browsers (System deps handled by nixpacks.toml)
+# Install Playwright browsers to a specific location that persists
+export PLAYWRIGHT_BROWSERS_PATH=/opt/render/project/src/.cache/ms-playwright
 playwright install chromium
