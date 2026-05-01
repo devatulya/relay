@@ -5,32 +5,24 @@ from backend.utils.logger import logger
 import urllib.parse
 import time
 
-import os
-
 class WhatsAppBot:
     def __init__(self):
         self.playwright = None
         self.browser = None
         self.context = None
         self.page = None
-        
-        # Load headless preference from ENV
-        env_headless = os.getenv("PLAYWRIGHT_HEADLESS", "false").lower() == "true"
-        self.default_headless = env_headless
 
-    async def launch(self, headless=None):
+    async def launch(self, headless=False):
         """
         Launches the browser and opens WhatsApp Web (Async).
         """
         try:
             self.playwright = await async_playwright().start()
-            
-            # Use passed param if provided, otherwise default from ENV
-            actual_headless = headless if headless is not None else self.default_headless
-            
+            # User data dir to persist session
             self.context = await self.playwright.chromium.launch_persistent_context(
                 user_data_dir="wa_session",
-                headless=actual_headless,
+                channel="chrome", 
+                headless=headless,
                 no_viewport=True,
                 args=["--start-maximized", "--disable-blink-features=AutomationControlled"]
             )
@@ -127,9 +119,10 @@ class WhatsAppBot:
             if stop_check and stop_check():
                 return "Stopped"
 
-            logger.info("Waiting 40s safe delay (interruptible)...")
-            # Break 40s into 1s chunks
-            for _ in range(40):
+            wait_time = random.randint(35, 200)
+            logger.info(f"Waiting {wait_time}s safe delay (interruptible)...")
+            # Break delay into 1s chunks
+            for _ in range(wait_time):
                 if stop_check and stop_check():
                     logger.warning("Stop detected during delay! Breaking sleep.")
                     return "Stopped"
@@ -139,7 +132,7 @@ class WhatsAppBot:
             
         except Exception as e:
             logger.error(f"Failed to send message: {e}")
-            raise e
+            return "Failed"
 
     async def close(self):
         if self.context:

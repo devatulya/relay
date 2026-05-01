@@ -1,12 +1,7 @@
 import asyncio
-import os
-from dotenv import load_dotenv
 from quart import Quart, request, jsonify, render_template
 from backend.main import OutreachOrchestrator
 from backend.utils.logger import logger
-
-# Load environment variables early
-load_dotenv()
 
 app = Quart(__name__, template_folder="../templates", static_folder="../static")
 
@@ -174,6 +169,4 @@ async def execute_automation():
 
 if __name__ == '__main__':
     # Running directly from backend/app.py
-    debug_mode = os.getenv("QUART_DEBUG", "false").lower() == "true"
-    port = int(os.getenv("PORT", 5000))
-    app.run(debug=debug_mode, host="0.0.0.0", port=port)
+    app.run(debug=True, port=5000)

@@ -2,10 +2,9 @@ flask
 playwright
 pandas
 gspread
-google-auth
+oauth2client
+oauth2client
 pytest
 pytest-asyncio
 quart
 uvicorn
-gunicorn
-python-dotenv

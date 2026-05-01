@@ -18,30 +18,22 @@ class GoogleSheetsService:
     def connect(self):
         """
         Connects to Google Sheets using service account credentials.
-        Tries environment variable GOOGLE_SHEETS_CREDS_JSON first, then fallback to file.
+        Compatible with gspread v6+ (uses google-auth, not oauth2client).
         """
         try:
-            creds_json = os.getenv("GOOGLE_SHEETS_CREDS_JSON")
+            # Resolve relative to THIS file's directory (backend/services/) -> up one level -> backend/
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            creds_path = os.path.join(base_dir, self.credentials_file)
             
-            if creds_json:
-                logger.info("Loading Google credentials from environment variable...")
-                creds_dict = json.loads(creds_json)
-                self.client = gspread.service_account_from_dict(creds_dict, scopes=SCOPES)
-            else:
-                # Resolve relative to THIS file's directory (backend/services/) -> up one level -> backend/
-                base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                creds_path = os.path.join(base_dir, self.credentials_file)
+            if not os.path.exists(creds_path):
+                creds_path = self.credentials_file
                 
-                if not os.path.exists(creds_path):
-                    creds_path = self.credentials_file
-                    
-                if not os.path.exists(creds_path):
-                    logger.error(f"Credentials file not found at {creds_path} and GOOGLE_SHEETS_CREDS_JSON not set.")
-                    raise FileNotFoundError("Credentials not found (Checked ENV and JSON file)")
-                
-                logger.info(f"Loading Google credentials from file: {creds_path}")
-                self.client = gspread.service_account(filename=creds_path, scopes=SCOPES)
+            if not os.path.exists(creds_path):
+                logger.error(f"Credentials file not found at {creds_path}")
+                raise FileNotFoundError("credentials.json not found")
             
+            # gspread v6+: use service_account() convenience function
+            self.client = gspread.service_account(filename=creds_path, scopes=SCOPES)
             logger.info("Connected to Google Sheets API")
             return True
         except Exception as e:
