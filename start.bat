@@ -18,7 +18,7 @@ if %errorlevel% neq 0 (
 
 :: Create Virtual Environment if it doesn't exist
 if not exist "venv" (
-    echo [1/4] Creating virtual environment (this takes a few seconds)...
+    echo [1/4] Creating virtual environment, this takes a few seconds...
     python -m venv venv
 )
 
