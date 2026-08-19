@@ -119,10 +119,9 @@ class WhatsAppBot:
             if stop_check and stop_check():
                 return "Stopped"
 
-            wait_time = random.randint(35, 200)
-            logger.info(f"Waiting {wait_time}s safe delay (interruptible)...")
-            # Break delay into 1s chunks
-            for _ in range(wait_time):
+            logger.info("Waiting 40s safe delay (interruptible)...")
+            # Break 40s into 1s chunks
+            for _ in range(40):
                 if stop_check and stop_check():
                     logger.warning("Stop detected during delay! Breaking sleep.")
                     return "Stopped"
@@ -132,7 +131,7 @@ class WhatsAppBot:
             
         except Exception as e:
             logger.error(f"Failed to send message: {e}")
-            return "Failed"
+            raise e
 
     async def close(self):
         if self.context:

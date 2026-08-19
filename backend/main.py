@@ -6,8 +6,6 @@ from backend.automation.whatsapp_sender import WhatsAppBot
 from backend.utils.logger import logger
 from datetime import datetime
 import time
-import random
-import asyncio
 
 class OutreachOrchestrator:
     def __init__(self):
@@ -140,8 +138,6 @@ class OutreachOrchestrator:
             self.end_time = None
             self.results = []
             
-            next_break_at = random.randint(15, 20)
-            
             creators_to_contact = payload.get("creators", [])
             sheet_url = payload.get("google_sheet_url")
             brand_name = payload.get("brand_name", "Unknown Brand")
@@ -215,17 +211,6 @@ class OutreachOrchestrator:
                             self.sheets_service.update_last_contacted(sheet_url, name, date_str)
                         except Exception as sheet_err:
                             self.add_log("WARNING", f"Failed to log {name} to sheet: {sheet_err}")
-                            
-                        # Long random break logic to prevent ban
-                        if self.sent_count >= next_break_at:
-                            long_pause = random.randint(600, 900) # 10 to 15 minutes
-                            self.add_log("INFO", f"Taking a random long break for {long_pause // 60} minutes and {long_pause % 60} seconds to avoid detection...")
-                            for _ in range(long_pause):
-                                if self.stop_requested:
-                                    break
-                                await asyncio.sleep(1)
-                            
-                            next_break_at += random.randint(15, 20)
                     
                     # Store for export
                     self.results.append({
@@ -238,8 +223,9 @@ class OutreachOrchestrator:
                             
                 except Exception as e:
                     self.add_log("ERROR", f"Failed to send to {creator.get('creator_name')}: {e}")
-                    # Continue to the next creator instead of stopping the whole process
-                    continue
+                    # Stop if PRD requires stopping on error, but we'll log it heavily
+                    self.status = "error"
+                    raise e
             
             if self.status != "stopped":
                 self.add_log("INFO", f"Execution complete. Sent {self.sent_count} messages.")
