@@ -94,12 +94,27 @@ class WhatsAppBot:
             textbox = None
             for selector in textbox_selectors:
                 try:
-                    await self.page.wait_for_selector(selector, timeout=5000)
+                    await self.page.wait_for_selector(selector, timeout=15000)
                     textbox = self.page.locator(selector).first
                     if await textbox.is_visible():
                         break
                 except:
                     continue
+
+            if not textbox:
+                # Give it one more chance with a longer wait
+                logger.warning("Textbox not found on first pass, waiting 10s and retrying...")
+                await asyncio.sleep(10)
+                for selector in textbox_selectors:
+                    try:
+                        textbox = self.page.locator(selector).first
+                        if await textbox.is_visible():
+                            break
+                        else:
+                            textbox = None
+                    except:
+                        textbox = None
+                        continue
             
             if not textbox:
                 # Last ditch check for invalid number

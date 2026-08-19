@@ -223,9 +223,15 @@ class OutreachOrchestrator:
                             
                 except Exception as e:
                     self.add_log("ERROR", f"Failed to send to {creator.get('creator_name')}: {e}")
-                    # Stop if PRD requires stopping on error, but we'll log it heavily
-                    self.status = "error"
-                    raise e
+                    logger.error(f"Skipping {creator.get('creator_name')} due to error: {e}")
+                    self.results.append({
+                        "name": creator.get('creator_name'),
+                        "number": creator.get('phone'),
+                        "ig_link": creator.get('ig_link', ''),
+                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "sent": "No"
+                    })
+                    continue  # Skip to the next creator
             
             if self.status != "stopped":
                 self.add_log("INFO", f"Execution complete. Sent {self.sent_count} messages.")
